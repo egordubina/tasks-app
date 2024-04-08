@@ -1,4 +1,4 @@
-import type { Task } from '@/app/lib/types'
+import type { Task } from './types'
 
 export const tasks: Task[] = [
   {

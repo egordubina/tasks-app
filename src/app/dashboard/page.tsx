@@ -19,15 +19,15 @@ export default async function Dashboard() {
         </div>
       </div>
       <div className="flex flex-col justify-between gap-4 sm:flex-row">
-        <div className="h-fit w-full sm:w-6/12 bg-neutral-100 dark:bg-neutral-900 p-3 sm:p-4 rounded-xl sm:rounded-2xl">
+        <div className="h-fit w-full sm:w-6/12 bg-neutral-100 p-3 sm:p-4 rounded-xl sm:rounded-2xl">
           <h1 className="texl-2xl font-bold mb-2 sm:mb-4">Pinned projects</h1>
         </div>
-        <div className="h-fit w-full sm:w-6/12 bg-neutral-100 dark:bg-neutral-900 p-2 sm:p-4 rounded-xl sm:rounded-2xl">
+        <div className="h-fit w-full sm:w-6/12 bg-neutral-100 p-2 sm:p-4 rounded-xl sm:rounded-2xl">
           <h1 className="texl-2xl font-bold mb-2 sm:mb-4">Pinned tasks</h1>
           <TasksList tasks={pinnedTasks} />
         </div>
       </div>
-      <div className="h-fit w-full bg-neutral-100 dark:bg-neutral-900 p-2 sm:p-4 rounded-xl sm:rounded-2xl">
+      <div className="h-fit w-full bg-neutral-100 p-2 sm:p-4 rounded-xl sm:rounded-2xl">
         <h1 className="texl-2xl font-bold mb-2 sm:mb-4">All tasks</h1>
         <TasksList tasks={tasks} />
       </div>

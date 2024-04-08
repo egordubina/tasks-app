@@ -1,4 +1,4 @@
-import type { Task, People } from './types'
+import type { Task, User, Project } from './types'
 
 export const tasks: Task[] = [
   {
@@ -24,11 +24,21 @@ export const tasks: Task[] = [
   },
 ]
 
-export const peoples: People[] = [
+export const users: User[] = [
   {
     id: 0,
     name: 'Mi Joon',
     status: 'online',
     subtitle: 'Work and Work'
+  }
+]
+
+export const projects: Project[] = [
+  {
+    id: 0,
+    name: 'Project name',
+    description: null,
+    tasksIds: [1, 2],
+    usersIds: [0]
   }
 ]

@@ -1,5 +1,5 @@
 import { fetchUserById } from "../lib/data"
-import type { People } from "../lib/types"
+import type { User } from "../lib/types"
 
 export default async function Account() {
   const user = await fetchUserById(0)

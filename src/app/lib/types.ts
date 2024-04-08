@@ -11,9 +11,17 @@ export type Task = {
   pin: boolean
 }
 
-export type People = {
+export type User = {
   id: number
   name: string
   subtitle: string
   status: 'online' | 'offline'
+}
+
+export type Project = {
+  id: number
+  name: string
+  description: string | null
+  tasksIds: number[] | null
+  usersIds: number[]
 }

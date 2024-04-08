@@ -55,7 +55,7 @@ export default function Profile() {
                 href={link.path}
                 className={`cursor-pointer rounded-xl hover:bg-neutral-200 transition-all p-2 md:p-3 ${
                   currentPath === link.path
-                    ? 'dark:bg-blue-800 dark:text-blue-100 bg-blue-100 text-blue-600'
+                    ? 'bg-blue-100 text-blue-600'
                     : ''
                 }`}
                 onClick={() => setShowMenu(false)}

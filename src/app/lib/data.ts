@@ -1,5 +1,5 @@
 import { Task } from './types'
-import { peoples, tasks } from './placeholder-data'
+import { users, tasks } from './placeholder-data'
 import { unstable_noStore as noStore } from 'next/cache'
 
 export async function fetchTasks(): Promise<Task[]> {
@@ -16,5 +16,10 @@ export async function fetchPinnedTasks(): Promise<Task[]> {
 
 export async function fetchUserById(id: number) {
   await new Promise((resolve) => setTimeout(resolve, 500))
-  return peoples.find(item => item.id === id)
+  return users.find(item => item.id === id)
+}
+
+export async function fetchProjects() {
+  await new Promise((resolve) => setTimeout(resolve, 2500))
+  return 
 }

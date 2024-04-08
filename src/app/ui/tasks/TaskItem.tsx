@@ -5,7 +5,7 @@ export default function TaskItem({ task }: { task: Task }) {
   return (
     <div
       className={clsx(
-        'rounded-xl sm:rounded-2xl bg-neutral-100 dark:bg-neutral-800 p-2 sm:p-4 flex justify-between items-center transition-transform duration-500 md:hover:-translate-y-1 cursor-pointer',
+        'rounded-xl sm:rounded-2xl bg-neutral-100 p-2 sm:p-4 flex justify-between items-center transition-transform duration-500 md:hover:-translate-y-1 cursor-pointer',
         {
           'bg-green-100': task.priority === 'low',
           'bg-orange-100': task.priority === 'medium',

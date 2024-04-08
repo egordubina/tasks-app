@@ -1,10 +1,12 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { NavItem } from '@/app/lib/types'
+import UserInfo from './UserInfo'
+import UserInfoSkeleton from './UserInfoSkeleton'
 
 const links: NavItem[] = [
   {
@@ -37,12 +39,15 @@ export default function Profile() {
         onClick={() => setShowMenu(!showMenu)}
       />
       {showMenu && (
-        <div className="bg-neutral-100 rounded-b-2xl rounded-s-2xl absolute end-2 sm:end-0 md:end-[16px] p-1 shadow-xl flex flex-col z-50 w-60">
+        <div
+          className={`${
+            showMenu ? 'block' : 'hidden'
+          } bg-neutral-100 rounded-b-2xl rounded-s-2xl absolute end-2 sm:end-0 md:end-[16px] p-1 shadow-xl flex flex-col z-50 w-60`}
+        >
           <div className="p-4">
-            <h1 className="text-center w-full text-lg font-bold">Mi Joon</h1>
-            <p className="text-center text-sm w-full text-neutral-500">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit
-            </p>
+            <Suspense fallback={<UserInfoSkeleton />}>
+              <UserInfo />
+            </Suspense>
           </div>
           <div className="flex flex-col">
             {links.map((link) => (
@@ -54,6 +59,7 @@ export default function Profile() {
                     : ''
                 }`}
                 onClick={() => setShowMenu(false)}
+                key={link.path}
               >
                 {link.title}
               </Link>

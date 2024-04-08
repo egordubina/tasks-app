@@ -1,6 +1,5 @@
-import TasksList from '../../ui/tasks/TasksList'
-import Search from '../../ui/search/Search'
-import { fetchPinnedTasks, fetchTasks } from '../../lib/data'
+import TasksList from '../ui/tasks/TasksList'
+import { fetchPinnedTasks, fetchTasks } from '../lib/data'
 
 export default async function Tasks() {
   const tasksData = fetchTasks()

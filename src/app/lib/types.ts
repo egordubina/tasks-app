@@ -10,3 +10,10 @@ export type Task = {
   done: boolean
   pin: boolean
 }
+
+export type People = {
+  id: number
+  name: string
+  subtitle: string
+  status: 'online' | 'offline'
+}

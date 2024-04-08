@@ -3,12 +3,15 @@ import TasksSkeleton from '@/app/ui/tasks/TasksSkeleton'
 export default function Loading() {
   return (
     <section className="flex flex-col gap-8">
-      <div className='flex gap-4'>
-        <div className="bg-neutral-100 p-4 rounded-2xl w-1/4">
-          <div className="bg-neutral-300 rounded-2xl w-1/2 p-2" />
-        </div>
-        <div className="bg-neutral-100 p-4 rounded-2xl w-1/4">
-          <div className="bg-neutral-300 rounded-2xl w-1/2 p-2" />
+      <div className="flex flex-col gap-2">
+        <h1 className="text-xl font-bold">Your productivity</h1>
+        <div className="flex gap-4">
+          <div className="bg-neutral-100 p-4 rounded-2xl w-1/4">
+            <div className="bg-neutral-300 rounded-2xl w-1/2 p-2" />
+          </div>
+          <div className="bg-neutral-100 p-4 rounded-2xl w-1/4">
+            <div className="bg-neutral-300 rounded-2xl w-1/2 p-2" />
+          </div>
         </div>
       </div>
       <div className="flex flex-col justify-between gap-4 sm:flex-row mx-2 sm:mx-0">

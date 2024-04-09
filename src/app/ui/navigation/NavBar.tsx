@@ -7,15 +7,15 @@ import { usePathname } from 'next/navigation'
 const links: NavItem[] = [
   {
     title: 'Dashboard',
-    path: '/dashboard',
+    path: '/manager/dashboard',
   },
   {
     title: 'Tasks',
-    path: '/tasks',
+    path: '/manager/tasks',
   },
   {
     title: 'Projects',
-    path: '/projects',
+    path: '/manager/projects',
   },
 ]
 

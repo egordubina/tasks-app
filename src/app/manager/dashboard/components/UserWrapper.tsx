@@ -1,4 +1,4 @@
-import { fetchUserById } from '../../lib/data'
+import { fetchUserById } from '../../../lib/data'
 
 export default async function UserWrapper() {
   const user = await fetchUserById(0)

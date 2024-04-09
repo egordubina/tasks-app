@@ -1,5 +1,5 @@
 import Card from '@/app/ui/card/Card'
-import { fetchTasks } from '../../lib/data'
+import { fetchTasks } from '../../../lib/data'
 
 export default async function ActivityBar() {
   const tasks = await fetchTasks()

@@ -1,5 +1,5 @@
 export enum TaskPriority { Low = "LOW", Medium = "MEDIUM", High = "HIGH" }
-export enum TaskStatus { InProgress = "IN_PROGRESS", Finished = "FINISHED", Backlog = "BACKLOG" }
+export enum TaskStatus { InProgress = "IN_PROGRESS", Backlog = "BACKLOG" }
 
 export type NavItem = {
   title: string

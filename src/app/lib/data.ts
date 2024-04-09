@@ -7,9 +7,14 @@ export async function fetchTasks(): Promise<Task[]> {
   return data
 }
 
+export async function fetchTaskById(id: number): Promise<Task> {
+  const data = await (await fetch(`http://192.168.3.23:8080/tasks/${id}`)).json()
+  return data
+}
+
 export async function fetchPinnedTasks(): Promise<Task[]> {
   noStore()
-  const data = await (await fetch("http://192.168.3.23:8080/tasks")).json()
+  const data = await (await fetch("http://192.168.3.23:8080/tasks?pinned=true")).json()
   return data
 }
 
@@ -19,7 +24,6 @@ export async function fetchUserById(id: number) {
 }
 
 export async function fetchProjects() {
-  noStore()
   const data: Project[] = await (await fetch("http://192.168.3.23:8080/projects")).json()
   return data
 }

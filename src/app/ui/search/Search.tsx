@@ -7,7 +7,7 @@ export default function Search() {
   return (
     <input
       type="text"
-      className="rounded-2xl w-full bg-neutral-100 p-4 transition"
+      className="rounded-2xl w-full bg-slate-50 shadow p-4 transition"
       placeholder="Search your tasks or projects... Search anything!"
       value={search}
       onChange={(e) => setSearch(e.target.value)}

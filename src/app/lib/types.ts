@@ -1,3 +1,6 @@
+export enum TaskPriority { Low = "LOW", Medium = "MEDIUM", High = "HIGH" }
+export enum TaskStatus { InProgress = "IN_PROGRESS", Finished = "FINISHED", Backlog = "BACKLOG" }
+
 export type NavItem = {
   title: string
   path: string
@@ -6,7 +9,8 @@ export type NavItem = {
 export type Task = {
   id: number
   title: string
-  priority: 'low' | 'medium' | 'high'
+  priority: TaskPriority
+  status: TaskStatus
   done: boolean
   pin: boolean
 }
@@ -15,13 +19,12 @@ export type User = {
   id: number
   name: string
   subtitle: string
-  status: 'online' | 'offline'
 }
 
 export type Project = {
   id: number
   name: string
   description: string | null
-  tasksIds: number[] | null
+  tasksIds: Task[]
   usersIds: number[]
 }

@@ -42,7 +42,7 @@ export default function Profile() {
         <div
           className={`${
             showMenu ? 'block' : 'hidden'
-          } bg-neutral-100 rounded-b-2xl rounded-s-2xl absolute end-2 sm:end-0 md:end-[16px] p-1 shadow-xl flex flex-col z-50 w-60`}
+          } bg-slate-50 rounded-b-2xl rounded-s-2xl absolute end-2 sm:end-0 md:end-[16px] p-1 shadow-xl flex flex-col z-50 w-60`}
         >
           <div className="p-4">
             <Suspense fallback={<UserInfoSkeleton />}>

@@ -22,7 +22,7 @@ const links: NavItem[] = [
 export default function NavBar() {
   const currentPath = usePathname()
   return (
-    <nav className="w-full flex p-1 sm:p-2 bg-neutral-100 rounded-b-2xl md:rounded-2xl md:w-1/6 md:h-[calc(100vh-2rem)] overflow-y-auto">
+    <nav className="w-full flex p-1 sm:p-2 bg-slate-50 rounded-b-2xl md:rounded-2xl md:w-1/6 md:h-[calc(100vh-2rem)] overflow-y-auto">
       <div className="flex md:flex-col md:w-full">
         {links.map((item) => (
           <Link

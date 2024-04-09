@@ -1,25 +1,25 @@
-import { Task } from './types'
-import { users, tasks } from './placeholder-data'
+import { Project, Task } from './types'
 import { unstable_noStore as noStore } from 'next/cache'
 
 export async function fetchTasks(): Promise<Task[]> {
   noStore()
-  await new Promise((resolve) => setTimeout(resolve, 1000))
-  return tasks.filter(item => item.done === false)
+  const data = await (await fetch("http://192.168.3.23:8080/tasks")).json()
+  return data
 }
 
 export async function fetchPinnedTasks(): Promise<Task[]> {
   noStore()
-  await new Promise((resolve) => setTimeout(resolve, 1500))
-  return tasks.filter(item => item.pin === true && item.done === false)
+  const data = await (await fetch("http://192.168.3.23:8080/tasks")).json()
+  return data
 }
 
 export async function fetchUserById(id: number) {
-  await new Promise((resolve) => setTimeout(resolve, 500))
-  return users.find(item => item.id === id)
+  const data = await (await fetch(`http://192.168.3.23:8080/users/${id}`)).json()
+  return data
 }
 
 export async function fetchProjects() {
-  await new Promise((resolve) => setTimeout(resolve, 2500))
-  return 
+  noStore()
+  const data: Project[] = await (await fetch("http://192.168.3.23:8080/projects")).json()
+  return data
 }

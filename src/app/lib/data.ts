@@ -24,6 +24,7 @@ export async function fetchUserById(id: number) {
 }
 
 export async function fetchProjects() {
+  noStore()
   const data: Project[] = await (await fetch("http://192.168.3.23:8080/projects")).json()
   return data
 }

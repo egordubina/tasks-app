@@ -9,6 +9,7 @@ export type NavItem = {
 export type Task = {
   id: number
   title: string
+  description: string | null
   priority: TaskPriority
   status: TaskStatus
   done: boolean

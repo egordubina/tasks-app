@@ -3,16 +3,17 @@ import ActivityBar from './components/ActivityBar'
 import PinnedTasks from './components/PinnedTasks'
 import TasksSkeleton from '../../ui/tasks/TasksSkeleton'
 import UserWrapper from './components/UserWrapper'
+import CardSkeleton from '@/app/ui/card/CardSkeleton'
 
 export default function Dashboard() {
   return (
     <section className="flex flex-col gap-10 mx-2 sm:mx-0">
       <div className="flex flex-col gap-4">
-        <Suspense fallback={'Loading.....'}>
+        <Suspense fallback={<CardSkeleton />}>
           <UserWrapper />
         </Suspense>
         <h1 className="text-xl font-bold">Your productivity</h1>
-        <Suspense fallback={'Loading'}>
+        <Suspense fallback={<CardSkeleton />}>
           <ActivityBar />
         </Suspense>
       </div>

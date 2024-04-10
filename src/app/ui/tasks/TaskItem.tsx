@@ -6,7 +6,7 @@ import { clsx } from 'clsx'
 
 export default function TaskItem({ task }: { task: Task }) {
   return (
-    <div className="rounded-md bg-neutral-100 border p-2 flex gap-2 items-center cursor-pointer">
+    <div className={`rounded-md p-2 flex gap-2 items-center cursor-pointer border transition-all ${task.done ? 'bg-neutral-50' : 'bg-neutral-100'}`}>
       <input
         onChange={async () => {
           await setDoneTask(task.id)

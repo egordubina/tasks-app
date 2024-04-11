@@ -19,16 +19,18 @@ export default function NewTask() {
       {taskValue && (
         <button
           className="hidden sm:block bg-blue-100 px-6 py-2 rounded-2xl transition hover:bg-blue-200"
-          // onClick={async () => {
-          //   await addTask({
-          //     id: 1000,
-          //     title: taskValue,
-          //     priority: TaskPriority.High,
-          //     status: TaskStatus.InProgress,
-          //     done: false,
-          //     pin: false,
-          //   })
-          // }}
+          onClick={async () => {
+            await addTask({
+              id: 1000,
+              title: taskValue,
+              description: null,
+              priority: TaskPriority.High,
+              status: TaskStatus.InProgress,
+              done: false,
+              pin: false,
+            })
+            setTaskValue('')
+          }}
         >
           Create
         </button>

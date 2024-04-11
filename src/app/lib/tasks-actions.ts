@@ -3,62 +3,62 @@
 import { revalidatePath } from 'next/cache'
 import { Task, TaskStatus } from './types'
 
+const base_url = 'http://192.168.3.23:8080'
+
 export async function updateTask(task: Task) {
-  await fetch('http://192.168.3.23:8080/tasks', {
-    method: 'PATCH',
-    body: JSON.stringify({
-      id: task.id,
-      title: task.title,
-      description: task.description,
-      priority: task.priority,
-      status: task.status,
-      done: task.done,
-      pin: task.pin
-    }),
-    headers: {
-      "Content-type": "application/json"
-    }
-  })
-  revalidatePath('/manager')
+	await fetch(`${base_url}/tasks`, {
+		method: 'PATCH',
+		body: JSON.stringify({
+			id: task.id,
+			title: task.title,
+			description: task.description,
+			priority: task.priority,
+			status: task.status,
+			done: task.done,
+			pin: task.pin,
+		}),
+		headers: {
+			'Content-type': 'application/json',
+		},
+	})
+	revalidatePath('/manager')
 }
 
 export async function deleteTask(id: number) {
-  await fetch(`http://192.168.3.23:8080/tasks/${id}`, {
-    method: 'DELETE'
-  })
-  revalidatePath('/manager')
+	await fetch(`${base_url}/tasks/${id}`, {
+		method: 'DELETE',
+	})
+	revalidatePath('/manager/tasks')
 }
 
-export async function setDoneTask(id: number) {
-  await fetch(`http://192.168.3.23:8080/tasks/${id}`, {
-    method: 'POST'
-  })
-  revalidatePath('/manager')
-}
+// export async function setDoneTask(id: number) {
+// 	await fetch(`${base_url}/tasks/${id}`, {
+// 		method: 'POST',
+// 	})
+// }
 
-export async function setPinTask(id: number) {
-  await fetch(`http://192.168.3.23:8080/tasks/pin/${id}`, {
-    method: 'POST'
-  })
-  revalidatePath('/manager')
-}
-
+// export async function setPinTask(id: number) {
+// 	await fetch(`${base_url}/tasks/pin/${id}`, {
+// 		method: 'POST',
+// 	})
+// 	revalidatePath('/manager/dashboard')
+// }
 
 export async function addTask(task: Task) {
-  await fetch('http://192.168.3.23:8080/tasks', {
-    method: 'POST',
-    body: JSON.stringify({
-      id: task.id,
-      title: task.title,
-      description: task.description,
-      priority: task.priority,
-      status: TaskStatus.InProgress,
-      done: false,
-      pin: false
-    }),
-    headers: {
-      "Content-type": "application/json"
-    }
-  })
-  revalidatePath('/manager/tasks')
+	await fetch(`${base_url}/tasks`, {
+		method: 'POST',
+		body: JSON.stringify({
+			id: task.id,
+			title: task.title,
+			description: task.description,
+			priority: task.priority,
+			status: TaskStatus.InProgress,
+			done: false,
+			pin: false,
+		}),
+		headers: {
+			'Content-type': 'application/json',
+		},
+	})
+	revalidatePath('/manager/tasks')
 }

@@ -1,3 +1,1 @@
-export default function ProjectItem() {
-    
-}
+export default function ProjectItem() {}

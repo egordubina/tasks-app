@@ -58,13 +58,14 @@ export default function TaskItem({ task }: { task: Task }) {
 									<button
 										className='hover:bg-neutral-200 rounded-full transition-all'
 										onClick={async () => {
-											if (taskTitle != task.title) {
+											if (taskTitle != task.title && taskTitle.length != 0) {
 												await updateTask({
 													...task,
 													title: taskTitle,
 												})
 												setEdit(false)
 											} else {
+                        setTaskTitle(task.title)
 												setEdit(false)
 											}
 										}}

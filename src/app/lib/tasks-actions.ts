@@ -21,7 +21,8 @@ export async function updateTask(task: Task) {
 			'Content-type': 'application/json',
 		},
 	})
-	revalidatePath('/manager')
+	revalidatePath('/manager/tasks')
+	revalidatePath('/manager/dashboard')
 }
 
 export async function deleteTask(id: number) {
@@ -29,20 +30,8 @@ export async function deleteTask(id: number) {
 		method: 'DELETE',
 	})
 	revalidatePath('/manager/tasks')
+	revalidatePath('/manager/dashboard')
 }
-
-// export async function setDoneTask(id: number) {
-// 	await fetch(`${base_url}/tasks/${id}`, {
-// 		method: 'POST',
-// 	})
-// }
-
-// export async function setPinTask(id: number) {
-// 	await fetch(`${base_url}/tasks/pin/${id}`, {
-// 		method: 'POST',
-// 	})
-// 	revalidatePath('/manager/dashboard')
-// }
 
 export async function addTask(task: Task) {
 	await fetch(`${base_url}/tasks`, {

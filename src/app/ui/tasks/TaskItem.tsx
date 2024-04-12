@@ -12,6 +12,7 @@ export default function TaskItem({ task }: { task: Task }) {
 	const [isEdit, setEdit] = useState(false)
 	const [taskTitle, setTaskTitle] = useState(task.title)
 	return (
+		// todo: check this file
 		<div
 			className={`rounded-md p-2 flex gap-2 items-center border justify-between transition-all ${
 				isDone ? 'bg-neutral-50' : 'bg-neutral-100'
@@ -22,7 +23,7 @@ export default function TaskItem({ task }: { task: Task }) {
 					onChange={async () => {
 						await updateTask({
 							...task,
-							done: isDone,
+							done: !isDone,
 						})
 						setDone(!isDone)
 					}}
@@ -65,7 +66,7 @@ export default function TaskItem({ task }: { task: Task }) {
 												})
 												setEdit(false)
 											} else {
-                        setTaskTitle(task.title)
+												setTaskTitle(task.title)
 												setEdit(false)
 											}
 										}}

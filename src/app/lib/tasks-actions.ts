@@ -11,7 +11,6 @@ export async function updateTask(task: Task) {
 		body: JSON.stringify({
 			id: task.id,
 			title: task.title,
-			description: task.description,
 			priority: task.priority,
 			status: task.status,
 			done: task.done,
@@ -39,7 +38,6 @@ export async function addTask(task: Task) {
 		body: JSON.stringify({
 			id: task.id,
 			title: task.title,
-			description: task.description,
 			priority: task.priority,
 			status: TaskStatus.InProgress,
 			done: false,

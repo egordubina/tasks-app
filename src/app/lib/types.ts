@@ -4,8 +4,8 @@ export enum TaskPriority {
 	High = 'HIGH',
 }
 export enum TaskStatus {
-	InProgress = 'IN_PROGRESS',
-	Backlog = 'BACKLOG',
+	InProgress = 'In progress',
+	Backlog = 'Backlog',
 }
 
 export type NavItem = {
@@ -16,7 +16,6 @@ export type NavItem = {
 export type Task = {
 	id: number
 	title: string
-	description: string | null
 	priority: TaskPriority
 	status: TaskStatus
 	done: boolean

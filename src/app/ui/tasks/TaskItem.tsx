@@ -5,17 +5,26 @@ import { TaskPriority, TaskStatus, type Task } from '@/app/lib/types'
 import { clsx } from 'clsx'
 import { useState } from 'react'
 import Image from 'next/image'
+import { useDebouncedCallback } from 'use-debounce'
+import SingleSelect from './SingleSelect'
 
 export default function TaskItem({ task }: { task: Task }) {
-	const [isDone, setDone] = useState(task.done)
-	const [isPin, setPin] = useState(task.pin)
-	const [isEdit, setEdit] = useState(false)
-	const [taskTitle, setTaskTitle] = useState(task.title)
+	const [taskState, setTaskState] = useState({
+		taskTitle: task.title,
+		isDone: task.done,
+		isPin: task.pin,
+		taskStatus: task.status,
+	})
+
+	const handleTaskTitle = useDebouncedCallback(async (title: string) => {
+		if (title != task.title && title.length >= 0)
+			await updateTask({ ...task, title: title })
+	}, 500)
+
 	return (
-		// todo: check this file
 		<div
 			className={`rounded-md p-2 flex gap-2 items-center border justify-between transition-all ${
-				isDone ? 'bg-neutral-50' : 'bg-neutral-100'
+				taskState.isDone ? 'bg-neutral-50' : 'bg-neutral-100'
 			}`}
 		>
 			<div className='flex gap-2 items-center'>
@@ -23,113 +32,85 @@ export default function TaskItem({ task }: { task: Task }) {
 					onChange={async () => {
 						await updateTask({
 							...task,
-							done: !isDone,
+							done: !taskState.isDone,
 						})
-						setDone(!isDone)
+						setTaskState({ ...taskState, isDone: !taskState.isDone })
 					}}
 					type='checkbox'
-					checked={isDone}
+					checked={taskState.isDone}
 					className='w-5 h-5 cursor-pointer transition-all rounded-xl appearance-none checked:bg-green-500 border border-neutral-500 checked:border-green-500'
 				/>
 				<div className='flex flex-col'>
 					<div className='flex w-full items-center justify-between'>
 						<div className='flex gap-2 items-center'>
-							{!isEdit && (
-								<p
-									className={`font-bold transition-all cursor-pointer rounded-xl p-1 hover:bg-neutral-200 ${
-										isDone ? 'line-through opacity-50' : ''
-									}`}
-									onClick={() => {
-										setEdit(true)
-									}}
-								>
-									{taskTitle}
-								</p>
-							)}
-							{isEdit && (
-								<div className='flex gap-2'>
-									<input
-										type='text'
-										value={taskTitle}
-										onChange={(e) => {
-											setTaskTitle(e.target.value)
+							<input
+								className={`font-bold transition-all cursor-pointer p-1  focus:outline-none outline-none ${
+									taskState.isDone
+										? 'bg-neutral-50 line-through opacity-50'
+										: 'bg-neutral-100'
+								}`}
+								value={taskState.taskTitle}
+								onChange={(e) => {
+									setTaskState({ ...taskState, taskTitle: e.target.value })
+									handleTaskTitle(e.target.value)
+								}}
+							/>
+							{!taskState.isDone && (
+								<>
+									{/* <p
+										className={clsx('text-xs p-1 rounded-md', {
+											'bg-neutral-300 text-neutral-900':
+												task.status === TaskStatus.Backlog,
+											'bg-blue-100 text-blue-900':
+												task.status === TaskStatus.InProgress,
+										})}
+									> */}
+									<SingleSelect
+										onItemClick={(item: string) => {
+											setTaskState({
+												...taskState,
+												taskStatus: TaskStatus.Backlog,
+											})
 										}}
-										className='border-2 border-neutral-100 border-b-neutral-500 bg-neutral-100 focus:border-b-blue-500 focus:outline-none'
+										value={taskState.taskStatus}
+										data={Object.values(TaskStatus)}
 									/>
-									<button
-										className='hover:bg-neutral-200 rounded-full transition-all'
-										onClick={async () => {
-											if (taskTitle != task.title && taskTitle.length != 0) {
-												await updateTask({
-													...task,
-													title: taskTitle,
-												})
-												setEdit(false)
-											} else {
-												setTaskTitle(task.title)
-												setEdit(false)
-											}
-										}}
+									{/* {task.status === TaskStatus.Backlog && 'backlog'}
+										{task.status === TaskStatus.InProgress && 'in progress'} */}
+									{/* </p> */}
+									<p
+										className={clsx('text-xs p-1 rounded-md', {
+											'bg-green-200 text-green-900':
+												task.priority === TaskPriority.Low,
+											'bg-orange-100 text-orange-900':
+												task.priority === TaskPriority.Medium,
+											'bg-red-100 text-red-900':
+												task.priority === TaskPriority.High,
+										})}
 									>
-										<Image width={24} height={24} src='/done.svg' alt='' />
-									</button>
-								</div>
-							)}
-							{!isDone && (
-								<p
-									className={clsx('text-xs p-1 rounded-md', {
-										'bg-neutral-300 text-neutral-900':
-											task.status === TaskStatus.Backlog,
-										'bg-blue-100 text-blue-900':
-											task.status === TaskStatus.InProgress,
-									})}
-								>
-									{task.status === TaskStatus.Backlog && 'backlog'}
-									{task.status === TaskStatus.InProgress && 'in progress'}
-								</p>
-							)}
-							{!isDone && (
-								<p
-									className={clsx('text-xs p-1 rounded-md', {
-										'bg-green-200 text-green-900':
-											task.priority === TaskPriority.Low,
-										'bg-orange-100 text-orange-900':
-											task.priority === TaskPriority.Medium,
-										'bg-red-100 text-red-900':
-											task.priority === TaskPriority.High,
-									})}
-								>
-									{task.priority === TaskPriority.Low && 'low'}
-									{task.priority === TaskPriority.Medium && 'medium'}
-									{task.priority === TaskPriority.High && 'high'}
-								</p>
+										{task.priority === TaskPriority.Low && 'low'}
+										{task.priority === TaskPriority.Medium && 'medium'}
+										{task.priority === TaskPriority.High && 'high'}
+									</p>
+								</>
 							)}
 						</div>
 					</div>
-					{task.description && (
-						<p
-							className={`text-xs text-neutral-800 transition-all p-1 ${
-								isDone ? 'line-through opacity-50' : ''
-							}`}
-						>
-							{task.description}
-						</p>
-					)}
 				</div>
 			</div>
 			<div className='flex gap-2 items-center'>
-				{!isDone && (
+				{!taskState.isDone && (
 					<button
 						className='cursour-pointer rounded-full p-1 md:hover:bg-neutral-200 active:bg-neutral-200'
 						onClick={async () => {
 							await updateTask({
 								...task,
-								pin: !isPin,
+								pin: !taskState.isPin,
 							})
-							setPin(!isPin)
+							setTaskState({ ...taskState, isPin: !taskState.isPin })
 						}}
 					>
-						{!isPin ? (
+						{!taskState.isPin ? (
 							<Image src='/keep.svg' width={24} height={24} alt='' />
 						) : (
 							<Image src='/keep_off.svg' width={24} height={24} alt='' />
